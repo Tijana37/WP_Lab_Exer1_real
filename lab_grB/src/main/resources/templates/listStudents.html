@@ -33,8 +33,10 @@
 </header>
 <section>
     <h2>Select the student to enroll:</h2>
-    <a href='/createStudent' type='button'>Create New Student</a> <br/> <br/>
-    <form th:method="POST"  th:action="@{/StudentEnrollmentSummary}">
+    <form th:method="POST"  th:action="@{/createStudent}">
+    <input type='submit' value="Create New Student"><br/>
+    </form>
+    <form th:method="POST"  th:action="@{/studentEnrollmentSummary}">
         <div th:each="student:${students}">
         <input type="radio" name="studentUsername" th:value="${student.getUsername()}" th:text="${student.getUsername()}">
         </div>

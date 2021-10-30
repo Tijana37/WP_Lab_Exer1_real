@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "StudentEnrollmentSummary", urlPatterns = "/StudentEnrollmentSummary")
+@WebServlet(name = "StudentEnrollmentSummary", urlPatterns = "/studentEnrollmentSummary")
 public class StudentEnrollmentSummary extends HttpServlet {
     public final CourseService courseService;
     private final SpringTemplateEngine springTemplateEngine;
@@ -29,6 +29,7 @@ public class StudentEnrollmentSummary extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
         String courseId = (String) request.getSession().getAttribute("chosenCourse");
         String username = (String) request.getParameter("studentUsername");
+
         courseService.addStudentInCourse(username, Long.parseLong(courseId));
         context.setVariable("allStudents", courseService.listStudentsByCourse(Long.parseLong(courseId)));
         context.setVariable("courseName", courseService.listAll().stream().filter(c->c.getCourseId().equals(Long.parseLong(courseId)))

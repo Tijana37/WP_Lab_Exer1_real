@@ -26,14 +26,14 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Student> listStudentsByCourse(Long courseId) {
-        return courseRepository.findById(courseId).getStudents();
+        return courseRepository.findAllStudentsByCourse(courseId);
     }
 
     @Override
     public Course addStudentInCourse(String username, Long courseId) {
         Student s = studentService.listAll().stream().filter(x->x.getUsername().compareTo(username)==0).findFirst().get();
         Course c = this.courseRepository.findById(courseId);
-        c.getStudents().add(s);
+        this.courseRepository.addStudentToCourse(s,c);
         return c;
     }
 }

@@ -14,7 +14,7 @@ public class StudentRepository {
 
     public StudentRepository() {
         this.students = new ArrayList<>();
-        IntStream.range(0,5).forEach(i->addStudent("Tijana"+String.valueOf(i),"Tijana"+String.valueOf(i), "Tijana","At"));
+        IntStream.range(0,5).forEach(i->addStudent("Tijana"+String.valueOf(i),"Tijana"+String.valueOf(i), "Tijana".concat(String.valueOf(i)),"At"));
     }
     //method added by me
     public Student addStudent(String username, String password, String name, String surname){
