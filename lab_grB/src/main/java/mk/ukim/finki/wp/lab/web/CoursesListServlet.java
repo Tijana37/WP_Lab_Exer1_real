@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "CoursesListServlet", value = "/listCourses")
+@WebServlet(name = "CoursesListServlet",urlPatterns = "/listCourses")
 public class CoursesListServlet extends HttpServlet {
 
     public final CourseService courseService;
@@ -29,6 +29,6 @@ public class CoursesListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("post COURSES");
     }
 }

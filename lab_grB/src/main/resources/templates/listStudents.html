@@ -34,13 +34,14 @@
 <section>
     <h2>Select the student to enroll:</h2>
     <a href='/createStudent' type='button'>Create New Student</a> <br/> <br/>
-    <div th:each="student:${}"
-    <input type="radio" name="size" value="petar.petrov"> Петар Петров <br/>
-    <input type="radio" name="size" value="mile.milev"> Миле Милев <br/>
-    <input type="radio" name="size" value="gjorgji.gjorgjiev"> Ѓорѓи Ѓорѓиев <br/>
-    <br/>
+    <form th:method="POST"  th:action="@{/StudentEnrollmentSummary}">
+        <div th:each="student:${students}">
+        <input type="radio" name="studentUsername" th:value="${student.getUsername()}" th:text="${student.getUsername()}">
+        </div>
+        <input type="submit">
 
-    <a href="/StudentEnrollmentSummary">Submit</a>
+    </form>
+
 </section>
 <aside>
     <table>
@@ -51,7 +52,7 @@
         </tr>
         <tr>
             <td><b>Course Id</b></td>
-            <td>2</td>
+            <td th:text="${courseToShow}"></td>
         </tr>
     </table>
 </aside>

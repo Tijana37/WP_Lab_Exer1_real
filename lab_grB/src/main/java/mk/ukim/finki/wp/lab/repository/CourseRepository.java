@@ -30,7 +30,8 @@ public class CourseRepository {
         return this.courses;
     }
     public Course findById(Long courseId){
-        return this.courses.stream().filter(c->c.getCourseId()==courseId).findFirst().get();
+        //when working with Long always use .equals, not ==
+        return this.courses.stream().filter(c-> c.getCourseId().equals(courseId)).findFirst().get();
     }
     public List<Student> findAllStudentsByCourse(Long courseId){
         return this.findById(courseId).getStudents();

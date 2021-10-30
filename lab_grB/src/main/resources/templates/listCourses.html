@@ -16,11 +16,15 @@
 </header>
 <main>
     <h2>Choose course:</h2>
-    <div th:each="course:${courses}">
-        <input type="radio" name="courseId" th:value="${course.getCourseId()}" th:text="${course.getName()}"><br>
+    <form th:action="@{/addStudent}" th:method="POST" >
+
+    <div th:each="course:${courses}" >
+        <input type="radio" name="courseId" th:value="${course.getCourseId()}" th:text="${course.getName()}">
     </div>
     <br/>
-    <input type="submit" href="/АddStudent">
+
+    <input type="submit" th:action="@{/addStudent}"/>
+    </form>
 </main>
 </body>
 </html>
