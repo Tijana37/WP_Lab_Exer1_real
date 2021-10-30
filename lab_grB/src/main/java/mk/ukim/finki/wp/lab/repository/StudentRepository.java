@@ -17,8 +17,10 @@ public class StudentRepository {
         IntStream.range(0,5).forEach(i->addStudent("Tijana"+String.valueOf(i),"Tijana"+String.valueOf(i), "Tijana","At"));
     }
     //method added by me
-    public void addStudent(String username, String password, String name, String surname){
-        this.students.add(new Student(username,password,name,surname));
+    public Student addStudent(String username, String password, String name, String surname){
+        Student s = new Student(username,password,name,surname);
+        this.students.add(s);
+        return s;
     }
     public List<Student> findAllStudents(){
         return this.students;
