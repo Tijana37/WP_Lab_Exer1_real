@@ -10,8 +10,8 @@
     <h1>Students in Course </h1>
 </header>
 <section>
-    <div th:text="${courseName}"></div>
-    <ul th:each="student:${allStudents}">
+    <div th:text="${courseToShow}"></div>
+    <ul th:each="student:${allStudentsInChosenCourse}">
         <li th:text="${student.getUsername()}"></li>
     </ul>
     <a href="/listCourses">Back</a>

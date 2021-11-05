@@ -11,8 +11,10 @@ import java.io.IOException;
 
 @WebServlet(name = "StudentEnrollmentSummary", urlPatterns = "/studentEnrollmentSummary")
 public class StudentEnrollmentSummary extends HttpServlet {
+    //dali treba da se iskoristi courseService od CoursesListServlet ili treba da se krerira nov ?
+    //istoto prasanje i za template ENgine
     public final CourseService courseService;
-    private final SpringTemplateEngine springTemplateEngine;
+    public final SpringTemplateEngine springTemplateEngine;
 
     public StudentEnrollmentSummary(CourseService courseService, SpringTemplateEngine springTemplateEngine) {
         this.courseService = courseService;
@@ -29,12 +31,13 @@ public class StudentEnrollmentSummary extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
         String courseId = (String) request.getSession().getAttribute("chosenCourse");
         String username = (String) request.getParameter("studentUsername");
-
-        courseService.addStudentInCourse(username, Long.parseLong(courseId));
-        context.setVariable("allStudents", courseService.listStudentsByCourse(Long.parseLong(courseId)));
-        context.setVariable("courseName", courseService.listAll().stream().filter(c->c.getCourseId().equals(Long.parseLong(courseId)))
-                .findFirst().get().getName());
-
+        String courseToShow =  this.courseService.listAll().stream().filter(c->c.getCourseId().toString().compareTo(courseId)==0).findFirst().get().getName();
+        System.out.println("do tuka e ok");
+        System.out.println(username+"--"+courseId);
+        this.courseService.addStudentInCourse(username, Long.parseLong(courseId));
+        context.setVariable("allStudentsInChosenCourse", courseService.listStudentsByCourse(Long.parseLong(courseId)));
+        context.setVariable("courseToShow", courseToShow);
+        System.out.println("enddddd");
         this.springTemplateEngine.process("studentsInCourse.html", context, response.getWriter());
     }
 }

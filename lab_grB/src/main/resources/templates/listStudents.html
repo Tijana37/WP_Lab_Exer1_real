@@ -33,7 +33,7 @@
 </header>
 <section>
     <h2>Select the student to enroll:</h2>
-    <form th:method="POST"  th:action="@{/createStudent}">
+    <form th:method="GET"  th:action="@{/createStudent}">
     <input type='submit' value="Create New Student"><br/>
     </form>
     <form th:method="POST"  th:action="@{/studentEnrollmentSummary}">
@@ -54,7 +54,7 @@
         </tr>
         <tr>
             <td><b>Course Id</b></td>
-            <td th:text="${courseToShow}"></td>
+            <td th:text="${session.chosenCourse}"></td>
         </tr>
     </table>
 </aside>

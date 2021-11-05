@@ -12,35 +12,30 @@ import java.io.IOException;
 @WebServlet(name = "ListStudentServlet", urlPatterns="/addStudent")
 public class ListStudentServlet extends HttpServlet {
     public final StudentService studentService;
-    private final SpringTemplateEngine springTemplateEngine;
+    public final SpringTemplateEngine springTemplateEngine;
+
+    //na predavanje se veli deka nie implementirame init() metodot, a ne konstruktorot, a na aud rabotime so kons??
 
     public ListStudentServlet(StudentService studentService, SpringTemplateEngine springTemplateEngine) {
         this.studentService = studentService;
         this.springTemplateEngine = springTemplateEngine;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WebContext context = new WebContext(request, response, request.getServletContext());
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        if(username!=null) //Option: insert new student was chosen
-            studentService.save(username,password,name,surname);
-
-        //It has to be with if condition because when inserting new Student, this Servlet is accessed two times and sets attribute two times
+        //It has to be with if condition because when inserting new Student,
+        // this Servlet is accessed two times and sets attribute two times, (when the second time the parameter=null!
         if(request.getSession().getAttribute("chosenCourse") == null){
-            //dali mora da se prikace kako variable za da se upotrebuva vo html?
+            //dali mora da se prikace vo context ili moze i preku sesija za da se upotrebuva vo html?
+            //request.Parameter e na nivo na Request, request.getSession.getAttribute e na nivo na sesija
             request.getSession().setAttribute("chosenCourse", request.getParameter("courseId"));
+
         }
+
         context.setVariable("students", this.studentService.listAll());
-        context.setVariable("courseToShow", request.getSession().getAttribute("chosenCourse"));
         this.springTemplateEngine.process("listStudents.html", context, response.getWriter());
 
     }
