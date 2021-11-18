@@ -24,7 +24,8 @@ public class FilterCourse implements Filter {
         String courseInParameter = (String) request.getParameter("courseId");
         String path = request.getServletPath();
 
-        if(courseInAttribute == null && courseInParameter==null && path.compareTo("/studentsCoursesServlet")!=0 &&path.compareTo("/listCourses")!=0) {
+        if(courseInAttribute == null && courseInParameter==null && path.compareTo("/studentsCoursesServlet")!=0 &&path.compareTo("/listCourses")!=0
+                && !path.startsWith("/courses")) {
             response.sendRedirect("/listCourses");
         }
         else {

@@ -21,11 +21,15 @@ public class ListStudentServlet extends HttpServlet {
         this.springTemplateEngine = springTemplateEngine;
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("auuu eve sme");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WebContext context = new WebContext(request, response, request.getServletContext());
-
+        System.out.println("/addstudent");
         //It has to be with if condition because when inserting new Student,
         // this Servlet is accessed two times and sets attribute two times, (when the second time the parameter=null!
         if(request.getSession().getAttribute("chosenCourse") == null){

@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Course;
+import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.repository.CourseRepository;
 import mk.ukim.finki.wp.lab.service.CourseService;
@@ -36,4 +37,23 @@ public class CourseServiceImpl implements CourseService {
         this.courseRepository.addStudentToCourse(s,c);
         return c;
     }
+
+    @Override
+    public void addCourse(String name, String descr, String professorId) {
+        courseRepository.addCourse(name,descr,professorId);
+    }
+
+    @Override
+    public void deleteCourse(Long id) throws CourseIDException {
+        courseRepository.deleteCourse(id);
+    }
+
+    @Override
+    public Course getCourse(Long id) {
+        return courseRepository.findById(id);
+    }
+
+
+
+
 }

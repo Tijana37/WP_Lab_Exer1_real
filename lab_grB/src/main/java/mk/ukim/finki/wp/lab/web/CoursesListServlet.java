@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "CoursesListServlet",urlPatterns = "/listCourses")
+@WebServlet(name = "CoursesListServlet",urlPatterns = "/d/listCourses")
 public class CoursesListServlet extends HttpServlet {
 
     public final CourseService courseService;
@@ -26,11 +26,10 @@ public class CoursesListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WebContext context = new WebContext(request, response, request.getServletContext());
+        System.out.println("servlet");
         context.setVariable("courses", courseService.listAll());
         //Ova go setirame za da moze da se popolnat povekje kursevi od edna SESIJA (browser)
         request.getSession().setAttribute("chosenCourse", null);
-
-
         this.springTemplateEngine.process("listCourses.html", context, response.getWriter());
     }
 
