@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block xmlns:th="http://www.thymeleaf.org">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">WEB PROGRAMMING SHOP</h1>
+            </div>
+        </section>
+    </th:block>
+        </head>
+<body>
+
+
+<section th:if="${editCourse!=null}">
+    <div th:text="${editCourse.getCourseId()}"></div>
+    <div th:text="${editCourse.getName()}"></div>
+    <div th:text="${editCourse.getDescription()}"></div>
+    <div th:text="${editCourse.getTeacher()}"></div>
+</section>
+<section>
+    <h1 th:if="${editCourse==null}"> Add course</h1>
+    <h1 th:if="${editCourse!=null}"> Edit course</h1>
+
+    <form th:method="POST" th:action="@{/courses/add-form}">
+        <label for='courseName'>Name:</label><input id='courseName' type='text' name='courseName'/><br/>
+        <label for='description'>Description:</label><input id='description' type='text' name='description'/><br/>
+        <label for="teachers">Choose a teacher:</label>
+        <select name="teacherId" id="teachers">
+            <!-- does not work -->
+
+            <option th:each="teacher:${teachers}" th:name="teacherId" th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+        </select>
+    <button type='submit' >Submit</button>
+    </form>
+</section>
+</body>
+</html>
