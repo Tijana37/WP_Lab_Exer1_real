@@ -25,4 +25,15 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherRepository.findAll().stream().filter(t->t.getId().equals(Long.parseLong(id))).findFirst().get();
     }
 
+    @Override
+    public void delete(Long id) {
+            teacherRepository.deleteByID(id);
+    }
+
+    @Override
+    public void addTeacher(String name, String surname) {
+      teacherRepository.addTeacher(name,surname);
+    }
+
+
 }

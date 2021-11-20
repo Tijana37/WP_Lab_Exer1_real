@@ -14,20 +14,16 @@
     <h1>Courses List</h1>
 </header>
 <main>
-    <!--
-    <h2>Number sessions:</h2>
-    <h2 th:text="${broj}"></h2>
--->
-    <h2>Choose course:</h2>
+    <h2>Teachers:</h2>
 
-        <table class="table table-striped">
+    <table class="table table-striped">
         <tbody>
-        <tr th:each="course:${coursesController}" class="course">
+        <tr th:each="teacher:${teachers}" class="teacher">
             <!--<input th:name="selectedCourse" type="radio" th:value="${course.getCourseId()}"> -->
-            <td th:text="${course.getName()}"></td>
+            <td th:text="${teacher.getName().concat(teacher.getSurname())}"></td>
             <td class="text-right">
                 <th:block >
-                    <form th:action="@{'/courses/delete/{id}' (id=${course.getCourseId()})}"
+                    <form th:action="@{'/teachers/delete/{id}' (id=${teacher.getId()})}"
                           th:method="DELETE">
                         <button type="submit"
                                 class="btn btn-sm btn-danger delete-product">
@@ -36,8 +32,8 @@
                     </form>
                 </th:block>
                 <th:block>
-                    <form th:method="post" th:action="@{'/courses/add/edit-form/{id}' (id=${course.getCourseId()})}"
-                       class="btn btn-sm btn-info edit-product">
+                    <form th:method="post" th:action="@{'/teachers/add/edit-form/{id}' (id=${teacher.getId()})}"
+                          class="btn btn-sm btn-info edit-product">
                         <button type="submit"
                                 class="btn btn-sm btn-primary cart-product">
                             <i class="fa fa-trash">EDIT</i>
@@ -45,29 +41,21 @@
                     </form>
                 </th:block>
             </td>
-        <br>
+            <br>
         </tr>
         </tbody>
-        </table>
+    </table>
 
     <th:block>
-        <form th:method="post" th:action="@{/courses/add/edit-form}"
+        <form th:method="post" th:action="@{/teachers/add/edit-form}"
               class="btn btn-sm btn-info edit-product">
             <button type="submit"
                     class="btn btn-sm btn-primary cart-product">
-                <i class="fa fa-trash">ADD NEW COURSE</i>
+                <i class="fa fa-trash">ADD NEW TEACHER</i>
             </button>
         </form>
     </th:block>
-    <th:block>
-      <form th:method="POST" th:action="@{/addStudent}"
-              class="btn btn-sm btn-info edit-product">
-            <button type="submit"
-                    class="btn btn-sm btn-primary cart-product">
-                <i class="fa fa-trash">Submit</i>
-            </button>
-        </form>
-    </th:block>
+
 
 </main>
 </body>

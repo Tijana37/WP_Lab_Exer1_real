@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block xmlns:th="http://www.thymeleaf.org">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">TEACHERS</h1>
+            </div>
+        </section>
+    </th:block>
+</head>
+<body>
+
+
+<section th:if="${editTeacher!=null}">
+    <div th:text="${editTeacher.getId()}"></div>
+    <div th:text="${editTeacher.getName()}"></div>
+    <div th:text="${editTeacher.getSurname()}"></div>
+</section>
+<section>
+    <h1 th:if="${editTeacher==null}"> Add teacher</h1>
+    <h1 th:if="${editTeacher!=null}"> Edit teacher</h1>
+
+    <form th:method="POST" th:action="@{/teachers/add-form}">
+        <label for='teacherName'>Name:</label><input id='teacherName' type='text' name='teacherName'/><br/>
+        <label for='teacherSurname'>Surname:</label><input id='teacherSurname' type='text' name='teacherSurname'/><br/>
+
+        <button type='submit' >Submit</button>
+    </form>
+</section>
+</body>
+</html>
