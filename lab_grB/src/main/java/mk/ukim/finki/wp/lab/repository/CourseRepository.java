@@ -3,16 +3,14 @@ package mk.ukim.finki.wp.lab.repository;
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
+import mk.ukim.finki.wp.lab.model.Exceptions.TeacherNotFound;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.model.Teacher;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public class CourseRepository {
@@ -44,10 +42,12 @@ public class CourseRepository {
         return course;
     }
 
-    public void addCourse(String name, String descr, String professorId) {
+    public void addCourse(String name, String descr, String professorId) throws TeacherNotFound {
         Course c = new Course(name, descr, new ArrayList<>());
-        Teacher t = teacherRepository.findByID(professorId);
-        c.setTeacher(t);
+        Optional<Teacher> t = teacherRepository.findByID(professorId);
+        if(t.isPresent())
+            c.setTeacher(t.get());
+        else throw new TeacherNotFound(professorId);
         if (!DataHolder.courses.contains(c))
             //Will compare by EQUALS (implemented in Course) and will not allow adding courses with same name
             DataHolder.courses.add(c);

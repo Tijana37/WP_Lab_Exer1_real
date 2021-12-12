@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.lab.service.TeacherService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -21,8 +22,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher findByID(String id) {
-        return teacherRepository.findAll().stream().filter(t->t.getId().equals(Long.parseLong(id))).findFirst().get();
+    public Optional<Teacher> findByID(String id) {
+        return teacherRepository.findAll().stream().filter(t->t.getId().equals(Long.parseLong(id))).findFirst();
     }
 
     @Override

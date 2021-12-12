@@ -4,6 +4,7 @@ import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
 import mk.ukim.finki.wp.lab.model.Exceptions.StudentNotExist;
+import mk.ukim.finki.wp.lab.model.Exceptions.TeacherNotFound;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.repository.CourseRepository;
 import mk.ukim.finki.wp.lab.service.CourseService;
@@ -47,7 +48,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void addCourse(String name, String descr, String professorId) {
+    public void addCourse(String name, String descr, String professorId) throws TeacherNotFound {
         courseRepository.addCourse(name, descr, professorId);
     }
 

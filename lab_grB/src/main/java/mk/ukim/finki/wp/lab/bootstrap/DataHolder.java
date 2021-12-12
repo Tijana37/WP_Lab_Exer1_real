@@ -37,6 +37,13 @@ public class DataHolder {
         //Comparator for sorting courses by name
         comparator = Comparator.comparing(Course::getName);
         courses.sort(comparator);
+
+        //Processs creating teachers
+        DataHolder.teachers.add(new Teacher("Mark", "Markss"));
+        DataHolder.teachers.add(new Teacher("John", "Jonhson"));
+        DataHolder.teachers.add(new Teacher("Peter", "Peterson"));
+        DataHolder.teachers.add(new Teacher("Clarice", "Blue"));
+        DataHolder.teachers.add(new Teacher("Marie", "West"));
     }
 
 }
