@@ -23,13 +23,18 @@ public class DataHolder {
 
     @PostConstruct
     public void init(){
+        //Automatization of the process creating students
         IntStream.range(0,5).forEach(i->students.add(
                 new Student("Tijana"+String.valueOf(i),"Tijana"+String.valueOf(i), "Tijana".concat(String.valueOf(i)),"At")));
+
+        //Process creating courses
         courses.add(new Course( "AI","Artifical Intelligence",new ArrayList<>( new StudentRepository().findAllStudents().subList(0,1))));
         courses.add(new Course( "ML","Machine Learning",new ArrayList<>( new StudentRepository().findAllStudents().subList(1,2))));
         courses.add(new Course( "OS","Operating Systems", new ArrayList<>(new StudentRepository().findAllStudents().subList(2,3))));
         courses.add(new Course( "LA","Linear Algebra", new ArrayList<>(new StudentRepository().findAllStudents().subList(3,4))));
         courses.add(new Course( "WP","Web Programming", new ArrayList<>(new StudentRepository().findAllStudents().subList(4,5))));
+
+        //Comparator for sorting courses by name
         comparator = Comparator.comparing(Course::getName);
         courses.sort(comparator);
     }

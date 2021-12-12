@@ -23,6 +23,8 @@
         <table class="table table-striped">
         <tbody>
         <tr th:each="course:${coursesController}" class="course">
+            <!--<tr th:each="course:${courses}" class="course"> -->
+
             <!--<input th:name="selectedCourse" type="radio" th:value="${course.getCourseId()}"> -->
             <td th:text="${course.getName()}"></td>
             <td class="text-right">

@@ -8,8 +8,12 @@ import java.util.Optional;
 
 public interface StudentService {
     List<Student> listAll();
+
     List<Student> searchByNameOrSurname(String text);
+
     Student save(String username, String password, String name, String surname);
-     Optional<Student> searchByUsername(String text);
+
+    Optional<Student> searchByUsername(String text);
+
     List<Course> getCoursesForStudent(Student s);
 }

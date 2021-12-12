@@ -1,7 +1,9 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
+import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
+import mk.ukim.finki.wp.lab.model.Exceptions.StudentNotExist;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.repository.CourseRepository;
 import mk.ukim.finki.wp.lab.service.CourseService;
@@ -9,6 +11,7 @@ import mk.ukim.finki.wp.lab.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -26,34 +29,44 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Student> listStudentsByCourse(Long courseId) {
+    public List<Student> listStudentsByCourse(Long courseId) throws CourseIDException {
         return courseRepository.findAllStudentsByCourse(courseId);
     }
 
     @Override
-    public Course addStudentInCourse(String username, Long courseId) {
-        Student s = studentService.listAll().stream().filter(x->x.getUsername().compareTo(username)==0).findFirst().get();
-        Course c = this.courseRepository.findById(courseId);
-        this.courseRepository.addStudentToCourse(s,c);
-        return c;
+    public Course addStudentInCourse(String username, Long courseId) throws CourseIDException, StudentNotExist {
+        Optional<Student> s = studentService.searchByUsername(username);
+        Optional<Course> c = this.courseRepository.findById(courseId);
+        if (s.isPresent() && c.isPresent()) {
+            this.courseRepository.addStudentToCourse(s.get(), c.get());
+            return c.get();
+        }
+        if (c.isEmpty())
+            throw new CourseIDException(courseId);
+        else throw new StudentNotExist(username);
     }
 
     @Override
     public void addCourse(String name, String descr, String professorId) {
-        courseRepository.addCourse(name,descr,professorId);
+        courseRepository.addCourse(name, descr, professorId);
     }
 
     @Override
     public void deleteCourse(Long id) throws CourseIDException {
-        courseRepository.deleteCourse(id);
+        Optional<Course> c = this.courseRepository.findById(id);
+        if (c.isPresent())
+            courseRepository.deleteCourse(c.get());
+        else
+            throw new CourseIDException(id);
     }
 
     @Override
-    public Course getCourse(Long id) {
-        return courseRepository.findById(id);
+    public Course getCourse(Long id) throws CourseIDException {
+        Optional<Course> c = courseRepository.findById(id);
+        if (c.isPresent())
+            return c.get();
+        else throw new CourseIDException(id);
     }
-
-
 
 
 }

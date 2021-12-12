@@ -2,6 +2,8 @@ package mk.ukim.finki.wp.lab.model;
 
 import lombok.Data;
 
+import java.util.Objects;
+
 @Data
 public class Student {
     String username;
@@ -14,5 +16,19 @@ public class Student {
         this.password = password;
         this.name = name;
         this.surname = surname;
+    }
+
+    //Equals by username, preserve adding students with same username
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(username, student.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

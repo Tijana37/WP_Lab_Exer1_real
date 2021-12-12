@@ -14,10 +14,8 @@ public class Course {
     List<Student> students;
     Teacher teacher;
 
-    //Во класата Course додадете го професорот како посебно својство. --> Kako toa kako posebno svojstvo?
     public Course(String name, String description, List<Student> students) {
         this.courseId = (long) (Math.random()*1000);
-        System.out.println(courseId);
         this.name = name;
         this.description = description;
         this.students = students;

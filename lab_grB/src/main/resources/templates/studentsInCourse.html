@@ -10,7 +10,10 @@
     <h1>Students in Course </h1>
 </header>
 <section>
-    <div th:text="${courseToShow}"></div>
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+    <div th:text="${courseToShow.getName()}"></div>
     <ul th:each="student:${allStudentsInChosenCourse}">
         <li th:text="${student.getUsername()}"></li>
     </ul>

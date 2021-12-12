@@ -30,7 +30,6 @@ public class FilterCourse implements Filter {
         }
         else {
             chain.doFilter(request, response);
-            System.out.println("end filter");
         }
 
     }

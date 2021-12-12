@@ -1,6 +1,6 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlets;
 
-import mk.ukim.finki.wp.lab.service.impl.StudentServiceImpl;
+import mk.ukim.finki.wp.lab.service.StudentService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -12,18 +12,17 @@ import java.io.IOException;
 @WebServlet(name = "CreateStudentServlet", urlPatterns = "/createStudent")
 public class CreateStudentServlet extends HttpServlet {
 
-    public final StudentServiceImpl studentService;
+    public final StudentService studentService;
     public final SpringTemplateEngine springTemplateEngine;
 
-    public CreateStudentServlet(StudentServiceImpl studentService, SpringTemplateEngine springTemplateEngine) {
+    public CreateStudentServlet(StudentService studentService, SpringTemplateEngine springTemplateEngine) {
         this.studentService = studentService;
         this.springTemplateEngine = springTemplateEngine;
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        WebContext context = new WebContext(request,response, request.getServletContext());
-
+        WebContext context = new WebContext(request, response, request.getServletContext());
         this.springTemplateEngine.process("createStudent.html", context, response.getWriter());
     }
 
@@ -36,13 +35,8 @@ public class CreateStudentServlet extends HttpServlet {
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
 
-        this.studentService.save(username,password,name,surname);
-
+        this.studentService.save(username, password, name, surname);
         context.setVariable("students", this.studentService.listAll());
-        //context.setVariable("courseToShow", request.getSession().getAttribute("chosenCourse"));
-
         this.springTemplateEngine.process("listStudents.html", context, response.getWriter());
-
-
     }
 }

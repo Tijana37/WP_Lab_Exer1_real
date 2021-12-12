@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlets;
 
 import mk.ukim.finki.wp.lab.service.StudentService;
 import org.thymeleaf.context.WebContext;
@@ -22,16 +22,10 @@ public class ListStudentServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("auuu eve sme");
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WebContext context = new WebContext(request, response, request.getServletContext());
-        System.out.println("/addstudent");
         //It has to be with if condition because when inserting new Student,
-        // this Servlet is accessed two times and sets attribute two times, (when the second time the parameter=null!
+        // this Servlet is accessed two times and sets attribute two times, ( the second time the parameter=null)
         if(request.getSession().getAttribute("chosenCourse") == null){
             //dali mora da se prikace vo context ili moze i preku sesija za da se upotrebuva vo html?
             //request.Parameter e na nivo na Request, request.getSession.getAttribute e na nivo na sesija

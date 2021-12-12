@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<title>Add new Student to Course</title>
 
+<head>
+    <meta charset="UTF-8"/>
+    <title>Products</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -18,39 +18,24 @@
 </head>
 <body>
 <header>
-    <h1>Student Enrollment - Select the Student </h1>
+    <h1>Courses List</h1>
 </header>
-<section>
+<main>
+    <!--
+    <h2>Number sessions:</h2>
+    <h2 th:text="${broj}"></h2>
+-->
     <div th:if="${hasError}">
         <h5 class="text-center text-danger" th:text="${error}"></h5>
     </div>
-    <h2>Select the student to enroll:</h2>
-    <form th:method="GET" th:action="@{/createStudent}">
-        <input type='submit' value="Create New Student"><br/>
-    </form>
-    <form th:method="POST" th:action="@{/studentEnrollmentSummary}">
-        <div th:each="student:${students}">
-            <input type="radio" name="studentUsername" th:value="${student.getUsername()}"
-                   th:text="${student.getUsername()}">
+    <h2>Choose course:</h2>
+    <form th:action="@{/addStudent}" th:method="POST">
+        <div th:each="course: ${courses}">
+            <input type="radio" name="courseId" th:value="${course.courseId}" th:text="${course.description}"/><br/>
         </div>
-        <input type="submit">
-
+        <br/>
+        <input type="submit" value="Submit">
     </form>
-
-</section>
-<aside>
-    <table>
-        <tr>
-            <th colspan="2">
-                Your Enrollment Status
-            </th>
-        </tr>
-        <tr>
-            <td><b>Course Id</b></td>
-            <td th:text="${session.chosenCourse}"></td>
-        </tr>
-    </table>
-</aside>
-
+</main>
 </body>
 </html>
