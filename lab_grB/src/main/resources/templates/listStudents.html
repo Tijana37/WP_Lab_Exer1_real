@@ -33,6 +33,12 @@
             <input type="radio" name="studentUsername" th:value="${student.getUsername()}"
                    th:text="${student.getUsername()}">
         </div>
+        <div >
+            <label>Insert grade: </label><br>
+            <input type=text name="studentGrade">
+            <label>Choose date: </label><br>
+            <input type="datetime-local" name="localDateTime"/>
+        </div>
         <input type="submit">
 
     </form>
@@ -47,7 +53,7 @@
         </tr>
         <tr>
             <td><b>Course Id</b></td>
-            <td th:text="${session.chosenCourse}"></td>
+            <td th:text="${session.chosenCourseName}"></td>
         </tr>
     </table>
 </aside>

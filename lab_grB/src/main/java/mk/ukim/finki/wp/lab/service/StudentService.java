@@ -13,7 +13,7 @@ public interface StudentService {
 
     Student save(String username, String password, String name, String surname);
 
-    Optional<Student> searchByUsername(String text);
+    Optional<Student> findByUsername(String text);
 
     List<Course> getCoursesForStudent(Student s);
 }

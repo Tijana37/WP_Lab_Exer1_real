@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.repository;
+package mk.ukim.finki.wp.lab.repository.impl;
 
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Course;
@@ -43,10 +43,10 @@ public class CourseRepository {
     }
 
     public void addCourse(String name, String descr, String professorId) throws TeacherNotFound {
-        Course c = new Course(name, descr, new ArrayList<>());
         Optional<Teacher> t = teacherRepository.findByID(professorId);
+        Course c = null;
         if(t.isPresent())
-            c.setTeacher(t.get());
+            c = new Course(name, descr, new ArrayList<>(), t.get());
         else throw new TeacherNotFound(professorId);
         if (!DataHolder.courses.contains(c))
             //Will compare by EQUALS (implemented in Course) and will not allow adding courses with same name
@@ -58,6 +58,7 @@ public class CourseRepository {
     public void deleteCourse(Course c) throws CourseIDException {
         DataHolder.courses.remove(c);
     }
+
 
 
 }

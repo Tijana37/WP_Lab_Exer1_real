@@ -1,6 +1,6 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
-import mk.ukim.finki.wp.lab.repository.ActiveSessionsRepository;
+import mk.ukim.finki.wp.lab.repository.impl.ActiveSessionsRepository;
 import mk.ukim.finki.wp.lab.service.SessionService;
 import org.springframework.stereotype.Service;
 

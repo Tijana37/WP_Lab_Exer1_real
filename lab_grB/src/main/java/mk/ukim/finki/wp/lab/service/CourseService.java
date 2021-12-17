@@ -5,8 +5,8 @@ import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
 import mk.ukim.finki.wp.lab.model.Exceptions.StudentNotExist;
 import mk.ukim.finki.wp.lab.model.Exceptions.TeacherNotFound;
 import mk.ukim.finki.wp.lab.model.Student;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface CourseService {
@@ -16,9 +16,10 @@ public interface CourseService {
 
     Course addStudentInCourse(String username, Long courseId) throws CourseIDException, StudentNotExist;
 
-    void addCourse(String name, String descr, String professorId) throws TeacherNotFound;
+    Course addCourse(String name, String descr, String professorId) throws TeacherNotFound;
 
     void deleteCourse(Long id) throws CourseIDException;
 
     Course getCourse(Long id) throws CourseIDException;
+
 }

@@ -56,8 +56,8 @@ public class TeacherController {
     @PostMapping({"/add/edit-form/{id}", "/add/edit-form"})
     public String getEditCoursePage(@PathVariable(required = false) Long id, Model model, HttpServletRequest req){
         try {
-            req.getSession().setAttribute("editTeacher", teacherService.findByID(id.toString()));
-            model.addAttribute("editTeacher", teacherService.findByID(id.toString()));
+            req.getSession().setAttribute("editTeacher", teacherService.findByID(id));
+            model.addAttribute("editTeacher", teacherService.findByID(id));
         }catch (Exception e){}
         model.addAttribute("teachers", teacherService.findAll());
         return "add-teacher";

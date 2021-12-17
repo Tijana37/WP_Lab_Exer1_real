@@ -16,6 +16,22 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 </head>
+<script>
+    function find_id() {
+
+        var courses = document.getElementsByName('courseId');
+        var final;
+        console.log("hello")
+        for (let i of courses) {
+
+            if (i.checked) {
+                console.log(i.id);
+                final = i.id;
+            }
+        }
+        location.href = location.href + `/submit/${final}`;
+    }
+</script>
 <body>
 <header>
     <h1>Courses List</h1>
@@ -26,8 +42,10 @@
     <table class="table table-striped">
         <tbody>
         <tr th:each="course:${coursesController}" class="course">
-            <td th:text="${course.getName()}"></td>
-            <td class="text-right">
+            <td>
+
+                <input type="radio" name="courseId" th:id="${course.courseId} " th:value="${course.courseId}"
+                       th:text="${course.description}"/><br/>
                 <th:block>
                     <form th:action="@{'/courses/delete/{id}' (id=${course.getCourseId()})}"
                           th:method="DELETE">
@@ -46,6 +64,8 @@
                         </button>
                     </form>
                 </th:block>
+
+            </td>
             </td>
             <br>
         </tr>
@@ -62,14 +82,14 @@
         </form>
     </th:block>
     <th:block>
-        <form th:method="POST" th:action="@{/addStudent}"
-              class="btn btn-sm btn-info edit-product">
-            <button type="submit"
-                    class="btn btn-sm btn-primary cart-product">
-                <i class="fa fa-trash">Submit</i>
-            </button>
-        </form>
+        <button type="submit"
+                onclick="find_id();"
+                class="btn btn-sm btn-primary cart-product">
+            <i class="fa fa-trash">Submit</i>
+        </button>
     </th:block>
+
+    <a href="/grades">Show all grades</a>
 
 </main>
 </body>

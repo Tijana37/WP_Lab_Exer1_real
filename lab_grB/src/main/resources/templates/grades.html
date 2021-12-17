@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title>Students in Course </title>
+    <title>Grades</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -18,38 +18,30 @@
 </head>
 <body>
 <header>
-    <h1>Students in Course </h1>
+    <h1>Grades List</h1>
 </header>
 <main>
-    <div th:if="${hasError}">
-        <h5 class="text-center text-danger" th:text="${error}"></h5>
-    </div>
-    <h1 th:text="${courseToShow.getName()}"></h1>
-
-    <label>Choose date: </label><br>
-    <form th:method="POST" th:action="@{/grades/studentsInCourseBetween}">
-        <input type="datetime-local" name="beginGrade"/>
-        <input type="datetime-local" name="endGrade"/>
-        <button type="submit"
-                class="btn btn-sm btn-danger delete-product">
-            <i class="fa fa-trash">Set Dates Between</i>
-        </button>
-    </form>
 
     <table class="table table-striped">
         <tbody>
-        <tr th:each="student:${allStudentsInChosenCourse}" class="course">
-            <td th:text="${student.getUsername()}"></td>
-            <td th:text="${grades.get(student)}"></td>
+
+        <label>Choose date: </label><br>
+        <form th:method="POST" th:action="@{/grades}">
+            <input type="datetime-local" name="beginGrade"/>
+            <input type="datetime-local" name="endGrade"/>
+            <button type="submit"
+                    class="btn btn-sm btn-danger delete-product">
+                <i class="fa fa-trash">Set Dates Between</i>
+            </button>
+        </form>
+        <tr th:each="grade:${allGrades}" class="course">
+            <td th:text="${grade.getStudent().getUsername()}"></td>
+            <td th:text="${grade.getCourse().getName()}"></td>
+            <td th:text="${grade.getGrade()}"></td>
+            <td th:text="${grade.getTimestamp()}"></td>
         </tr>
         </tbody>
-
     </table>
-
-    <!--ZA SERVLET: <a href="/listCourses">Back</a>-->
-    <!-- za controller: -->
-    <a href="/courses">Back</a>
-
 
 
 </main>

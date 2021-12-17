@@ -39,7 +39,7 @@ public class StudentsCoursesServlet extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
         String chosenStudentUsername = request.getParameter("studentToShow");
         System.out.println(chosenStudentUsername);
-        Optional<Student> chosenStudent = this.studentService.searchByUsername(chosenStudentUsername);
+        Optional<Student> chosenStudent = this.studentService.findByUsername(chosenStudentUsername);
         if(chosenStudent.isPresent()){
             List<Course> hisCourses = studentService.getCoursesForStudent(chosenStudent.get());
             context.setVariable("chosenStudent", chosenStudent.get().getUsername());
