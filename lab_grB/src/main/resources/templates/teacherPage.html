@@ -20,7 +20,7 @@
         <tbody>
         <tr th:each="teacher:${teachers}" class="teacher">
             <!--<input th:name="selectedCourse" type="radio" th:value="${course.getCourseId()}"> -->
-            <td th:text="${teacher.getName().concat(teacher.getSurname())}"></td>
+            <td th:text="${teacher.getName()}"></td>
             <td class="text-right">
                 <th:block >
                     <form th:action="@{'/teachers/delete/{id}' (id=${teacher.getId()})}"

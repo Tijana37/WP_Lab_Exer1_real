@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"/>
 <title>Add new Student to Course</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -26,20 +26,20 @@
     </div>
     <h2>Select the student to enroll:</h2>
     <form th:method="GET" th:action="@{/createStudent}">
-        <input type='submit' value="Create New Student"><br/>
+        <input type='submit' value="Create New Student"/><br/>
     </form>
     <form th:method="POST" th:action="@{/studentEnrollmentSummary}">
         <div th:each="student:${students}">
             <input type="radio" name="studentUsername" th:value="${student.getUsername()}"
-                   th:text="${student.getUsername()}">
+                   th:text="${student.getUsername()}"/>
         </div>
         <div >
-            <label>Insert grade: </label><br>
-            <input type=text name="studentGrade">
-            <label>Choose date: </label><br>
+            <label>Insert grade: </label><br/>
+            <input type='text' name="studentGrade"/>
+            <label>Choose date: </label><br/>
             <input type="datetime-local" name="localDateTime"/>
         </div>
-        <input type="submit">
+        <input type="submit"/>
 
     </form>
 

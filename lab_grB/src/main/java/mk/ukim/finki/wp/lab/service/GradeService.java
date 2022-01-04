@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
 import mk.ukim.finki.wp.lab.model.Exceptions.StudentNotExist;
 import mk.ukim.finki.wp.lab.model.Grade;
 import mk.ukim.finki.wp.lab.model.Student;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public interface GradeService {
 
     HashMap<Student, Character> getGradesForStudentsInCourse(Long courseId) throws CourseIDException;
 
-    List<Grade> findAllGrades();
+    Iterable<Grade> findAllGrades();
 
     List<Grade> findGradesBetween(LocalDateTime begin, LocalDateTime end);
 

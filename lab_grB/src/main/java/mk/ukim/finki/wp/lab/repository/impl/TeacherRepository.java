@@ -2,8 +2,10 @@ package mk.ukim.finki.wp.lab.repository.impl;
 
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Teacher;
+import mk.ukim.finki.wp.lab.model.TeacherFullname;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -27,7 +29,15 @@ public class TeacherRepository {
 
     }
 
-    public void addTeacher(String name, String surname) {
-        DataHolder.teachers.add(new Teacher(name, surname));
+    public void addTeacher(String name, String surname, LocalDate date) {
+        System.out.println("name: "+name);
+        System.out.println("surname: "+surname);
+
+        TeacherFullname teacherFullname = new TeacherFullname();
+        teacherFullname.setName(name);
+        teacherFullname.setSurname(surname);
+        //DataHolder.teachers.add(new Teacher(name, surname));
+        DataHolder.teachers.add(new Teacher(teacherFullname,date));
+
     }
 }

@@ -36,10 +36,8 @@ public class StudentEnrollmentSummary extends HttpServlet {
         Long courseId = (Long) request.getSession().getAttribute("chosenCourseId");
         String username = (String) request.getParameter("studentUsername");
         String grade_character = request.getParameter("studentGrade");
-        System.out.println("-----------"+request.getParameter("localDateTime"));
 
         LocalDateTime localDateTime = LocalDateTime.parse(request.getParameter("localDateTime"));
-        System.out.println("-----------"+localDateTime);
         Course courseToShow = null;
         Grade grade = null;
         if (username == null) {
@@ -58,6 +56,8 @@ public class StudentEnrollmentSummary extends HttpServlet {
             request.getSession().setAttribute("courseToShow", courseToShow);
             //extension lab3
             context.setVariable("grades", gradeService.getGradesForStudentsInCourse(courseId));
+            //To render html properly
+            response.setContentType("application/xhtml+xml");
             this.springTemplateEngine.process("studentsInCourse.html", context, response.getWriter());
         } catch (CourseIDException | StudentNotExist e) {
             context.setVariable("hasError", true);

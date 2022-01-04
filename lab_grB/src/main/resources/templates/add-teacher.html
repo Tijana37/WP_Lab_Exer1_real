@@ -24,6 +24,8 @@
     <form th:method="POST" th:action="@{/teachers/add-form}">
         <label for='teacherName'>Name:</label><input id='teacherName' type='text' name='teacherName'/><br/>
         <label for='teacherSurname'>Surname:</label><input id='teacherSurname' type='text' name='teacherSurname'/><br/>
+        <label for='teacherEmployment'>Surname:</label>
+        <input id='teacherEmployment' type="datetime-local" name='teacherEmployment'/><br/>
 
         <button type='submit' >Submit</button>
     </form>

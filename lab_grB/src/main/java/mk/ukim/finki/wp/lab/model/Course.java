@@ -26,12 +26,13 @@ public class Course {
     public Course() {
     }
 
-    public Course(String name, String description, List<Student> students, Teacher teacher) {
+    public Course(String name, String description, List<Student> students, Teacher teacher, Type type) {
         //this.courseId = (long) (Math.random()*1000);
         this.name = name;
         this.description = description;
         this.students = students;
         this.teacher = teacher;
+        this.type = type;
     }
 
     public void setStudents(List<Student> students) {

@@ -32,7 +32,7 @@ public class ListStudentServlet extends HttpServlet {
             request.getSession().setAttribute("chosenCourse", request.getParameter("courseId"));
 
         }
-
+        response.setContentType("application/xhtml+xml");
         context.setVariable("students", this.studentService.listAll());
         this.springTemplateEngine.process("listStudents.html", context, response.getWriter());
 

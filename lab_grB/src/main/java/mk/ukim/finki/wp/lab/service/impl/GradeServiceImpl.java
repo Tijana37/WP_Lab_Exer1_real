@@ -9,6 +9,9 @@ import mk.ukim.finki.wp.lab.repository.jpa.CourseRepositoryJPA;
 import mk.ukim.finki.wp.lab.repository.jpa.GradeRepositoryJPA;
 import mk.ukim.finki.wp.lab.repository.jpa.StudentRepositoryJPA;
 import mk.ukim.finki.wp.lab.service.GradeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -57,8 +60,12 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public List<Grade> findAllGrades() {
-        return gradeRepositoryJPA.findAll();
+    public Iterable<Grade> findAllGrades() {
+        Pageable firstPageWithTwoElements = PageRequest.of(0, 2);
+        Page<Grade> result = gradeRepositoryJPA.findAll(firstPageWithTwoElements);
+        //return   result.get().collect(Collectors.toList());
+        return result;
+
     }
 
     @Override

@@ -23,6 +23,7 @@ public class CreateStudentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         WebContext context = new WebContext(request, response, request.getServletContext());
+        response.setContentType("application/xhtml+xml");
         this.springTemplateEngine.process("createStudent.html", context, response.getWriter());
     }
 
@@ -37,6 +38,7 @@ public class CreateStudentServlet extends HttpServlet {
 
         this.studentService.save(username, password, name, surname);
         context.setVariable("students", this.studentService.listAll());
+        response.setContentType("application/xhtml+xml");
         this.springTemplateEngine.process("listStudents.html", context, response.getWriter());
     }
 }

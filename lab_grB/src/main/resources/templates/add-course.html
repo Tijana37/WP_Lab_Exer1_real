@@ -11,7 +11,6 @@
 
 <body>
 
-
 <section th:if="${editCourse!=null}">
     <div >EDITED COURSE</div>
     <div th:text="${editCourse.getCourseId()}"></div>
@@ -29,6 +28,10 @@
         <label for="teachers">Choose a teacher:</label>
         <select name="teacherId" id="teachers">
             <option th:each="teacher:${teachers}" th:name="teacherId" th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+        </select>
+        <label for="type">Select type of course:</label>
+        <select name="type" id="type">
+            <option th:each="type:${types}" th:name="type" th:value="${type.toString()}" th:text="${type.toString()}"></option>
         </select>
     <button type='submit' >Submit</button>
     </form>

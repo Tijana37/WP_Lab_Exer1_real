@@ -35,6 +35,16 @@
 <body>
 <header>
     <h1>Courses List</h1>
+    <header>
+
+
+
+        </th:block>
+        <form th:action="@{/logout}">
+        <button >LOG OUT</button>
+        </form>
+    </header>
+
 </header>
 <main>
     <h2>Choose course:</h2>
@@ -46,7 +56,7 @@
 
                 <input type="radio" name="courseId" th:id="${course.courseId} " th:value="${course.courseId}"
                        th:text="${course.description}"/><br/>
-                <th:block>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <form th:action="@{'/courses/delete/{id}' (id=${course.getCourseId()})}"
                           th:method="DELETE">
                         <button type="submit"
@@ -55,7 +65,7 @@
                         </button>
                     </form>
                 </th:block>
-                <th:block>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <form th:method="post" th:action="@{'/courses/add/edit-form/{id}' (id=${course.getCourseId()})}"
                           class="btn btn-sm btn-info edit-product">
                         <button type="submit"
@@ -72,7 +82,7 @@
         </tbody>
     </table>
 
-    <th:block>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
         <form th:method="post" th:action="@{/courses/add/edit-form}"
               class="btn btn-sm btn-info edit-product">
             <button type="submit"

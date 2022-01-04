@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name="teachers")
+@Table(name = "teachers")
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +23,27 @@ public class Teacher {
     public Teacher() {
     }
 
-    public Teacher(String name, String surname) {
-        //this.id = (long) (Math.random() * 1000);
-        //this.teacherFullname.setName(name);
-        //this.teacherFullname.setSurname(surname);
+//    public Teacher(String name, String surname) {
+//        //this.id = (long) (Math.random() * 1000);
+//        this.teacherFullname.setName(name);
+//        this.teacherFullname.setSurname(surname);
+//    }
+
+
+    public Teacher(TeacherFullname teacherFullname, LocalDate dateOfEmployment) {
+        this.teacherFullname = teacherFullname;
+        this.dateOfEmployment = dateOfEmployment;
     }
+
+
+    public String getName() {
+        System.out.println("teacher name: " + teacherFullname.getName());
+        return teacherFullname.getName();
+    }
+
+    public String getSurname() {
+        System.out.println("teacher surname: "+teacherFullname.getSurname());
+        return teacherFullname.getSurname();
+    }
+
 }

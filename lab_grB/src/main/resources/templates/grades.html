@@ -34,12 +34,20 @@
                 <i class="fa fa-trash">Set Dates Between</i>
             </button>
         </form>
-        <tr th:each="grade:${allGrades}" class="course">
+
+        <tr th:each="grade:${pageGrade}" class="course">
             <td th:text="${grade.getStudent().getUsername()}"></td>
             <td th:text="${grade.getCourse().getName()}"></td>
             <td th:text="${grade.getGrade()}"></td>
             <td th:text="${grade.getTimestamp()}"></td>
         </tr>
+
+        <th:block th:if="${hasMoreGrades==true}">
+        <form  th:method="GET" th:action="@{/grades/next}">
+                <input type="submit" th:text="Next">
+        </form>
+        </th:block>
+
         </tbody>
     </table>
 

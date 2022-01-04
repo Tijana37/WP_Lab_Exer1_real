@@ -16,7 +16,7 @@ public interface CourseService {
 
     Course addStudentInCourse(String username, Long courseId) throws CourseIDException, StudentNotExist;
 
-    Course addCourse(String name, String descr, String professorId) throws TeacherNotFound;
+    Course addCourse(String name, String descr, String professorId, String type) throws TeacherNotFound;
 
     void deleteCourse(Long id) throws CourseIDException;
 

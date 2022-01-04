@@ -1,12 +1,9 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
-import mk.ukim.finki.wp.lab.model.Course;
+import mk.ukim.finki.wp.lab.model.*;
 import mk.ukim.finki.wp.lab.model.Exceptions.CourseIDException;
 import mk.ukim.finki.wp.lab.model.Exceptions.StudentNotExist;
 import mk.ukim.finki.wp.lab.model.Exceptions.TeacherNotFound;
-import mk.ukim.finki.wp.lab.model.Grade;
-import mk.ukim.finki.wp.lab.model.Student;
-import mk.ukim.finki.wp.lab.model.Teacher;
 import mk.ukim.finki.wp.lab.repository.jpa.CourseRepositoryJPA;
 import mk.ukim.finki.wp.lab.repository.jpa.GradeRepositoryJPA;
 import mk.ukim.finki.wp.lab.service.CourseService;
@@ -67,11 +64,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course addCourse(String name, String descr, String professorId) throws TeacherNotFound {
+    public Course addCourse(String name, String descr, String professorId, String type) throws TeacherNotFound {
         Optional<Teacher> t = teacherService.findByID(Long.parseLong(professorId));
         if (t.isPresent()) {
             // courseRepository.addCourse(name, descr, new ArrayList<>(),t.get());
-            return courseRepository.save(new Course(name, descr, new ArrayList<>(), t.get()));
+            return courseRepository.save(new Course(name, descr, new ArrayList<>(), t.get(),Type.valueOf(type)));
         } else
             throw new TeacherNotFound(professorId);
     }

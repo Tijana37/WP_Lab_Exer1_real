@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping(value="/teachers")
@@ -27,18 +28,20 @@ public class TeacherController {
 
     @PostMapping("/add-form")
     public String saveTeacher(@RequestParam String teacherName, @RequestParam String teacherSurname,
-                             @RequestParam(required = false) String teacherId, HttpServletRequest request){
+                             @RequestParam(required = false) String teacherId, @RequestParam(required = false) LocalDate dateOfEmployment,
+                              HttpServletRequest request){
         //imeplenetiraj da pokazuva error ako nema profesor so takov ID za da se dodade
         try {
             Teacher toEditTeacher = (Teacher) request.getSession().getAttribute("editTeacher");
             if(toEditTeacher!= null) {//znaci sakame edit na star course, a ne add New Course
                 request.getSession().setAttribute("editTeacher", null);
+                dateOfEmployment = toEditTeacher.getDateOfEmployment();
                 teacherService.delete(toEditTeacher.getId());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        teacherService.addTeacher(teacherName,teacherSurname);
+        teacherService.addTeacher(teacherName,teacherSurname, dateOfEmployment);
         return "redirect:/teachers";
     }
 
